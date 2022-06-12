@@ -25,10 +25,9 @@ export default {
     firebase.auth().onAuthStateChanged((user) => {
       this.$store.commit("updateUser", user);
       if(user){
-        this.$store.dispatch("getCurrentUser");
-        console.log(this.$store.state.profileEmail);
+        this.$store.dispatch("getCurrentUser", user);
       }
-    })
+    });
     this.checkRoute();
   },
   mounted() {},
@@ -36,7 +35,7 @@ export default {
     checkRoute(){
       if (this.$route.name === "Login" || this.$route.name === "Register" || this.$route.name === "ForgotPassword"){
         this.navigation = true;
-        return
+        return;
       }
       this.navigation = false;
     }
